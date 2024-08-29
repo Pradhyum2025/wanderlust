@@ -1,0 +1,73 @@
+#loginPage{
+  width: 25rem;height: 35rem;
+  border: 2px solid rgb(214, 220, 214);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items:center;
+  position: fixed;
+  top: 135px;
+  right:550px;
+  z-index: 10;
+  background-color: white;
+  border-radius: 1rem;
+  display: none;
+}
+.login-heading{
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  color: #fe424d;
+  text-shadow: 1px 1px 6px bisque;
+}
+
+.login-btn{
+  background-color: #fe424d !important;
+}
+.login-btn:hover{
+  background-color: #e83f4a !important;
+}
+.loginHR{
+  display: flex;
+}
+.otherWaytoLogin{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+  row-gap: 1rem;
+
+}
+.otherWaytoLogin div{
+  border: 2px solid #7d7575;
+  width: 100%;
+  border-radius: .8rem;
+  padding: .5rem;
+  display: flex;
+  justify-content: flex-start;
+  column-gap: 2rem;
+  cursor: pointer;
+}
+.otherWaytoLogin div img{
+  width: 1.6rem;
+}
+.otherWaytoLogin div span{
+  font-size: 1rem;
+  font-weight: 500;
+}
+#hideLoginForm{
+  position: absolute;
+  padding: 3px;
+  top: -2px;
+  right:2px;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+#hideLoginForm i{
+  padding: 3px 5px;
+  border-radius: .4rem;
+}
+
+#hideLoginForm i:hover{
+  background-color:  #f3efef;
+}

@@ -1,0 +1,144 @@
+<%layout("/layouts/boilerplate.ejs")%>
+
+<div id="filters">  
+  <a href="/listings">
+    <div class="filter">
+      <i class="fa-solid fa-border-all"></i>
+      <p>All</p>
+    </div>
+  </a>
+  <a href="/listings/filters?q=trending">
+    <div class="filter">
+      <i class="fa-solid fa-fire"></i>
+      <p>Trending</p>
+    </div>
+  </a>
+  <a href="/listings/filters?q=room">
+    <div class="filter">
+      <i class="fa-solid fa-bed"></i>
+      <p>Room</p>
+    </div>
+  </a>
+  <a href="/listings/filters?q=hotel">
+    <div class="filter">
+      <i class="fa-solid fa-hotel"></i>
+      <p>Hotel</p>
+    </div>
+  </a>
+  <!-- enum:['mountain','room','hotel','pools','food'] -->
+  <a href="/listings/filters?q=pools">
+    <div class="filter">
+      <i class="fa-solid fa-water-ladder"></i>
+      <p>Amazing pools</p>
+    </div>
+  </a>
+  <a href="/listings/filters?q=cool_places">
+    <div class="filter">
+      <i class="fa-solid fa-tree"></i>
+      <p>Cool place</p>
+    </div>
+  </a>
+  <a href="/listings/filters?q=mountain">
+    <div class="filter">
+      <i class="fa-solid fa-mountain-city"></i>
+      <p>Mountains</p>
+    </div>
+  </a>
+  <a href="/listings/filters?q=food">
+    <div class="filter">
+      <i class="fa-solid fa-mug-hot"></i>
+      <p>Bed & breakfast</p>
+    </div>
+  </a>
+  <a href="/listings/filters?q=food">
+    <div class="filter">
+      <i class="fa-solid fa-mug-hot"></i>
+      <p>Bed & breakfast</p>
+    </div>
+  </a>
+  <a href="/listings/filters?q=food">
+    <div class="filter">
+      <i class="fa-solid fa-mug-hot"></i>
+      <p>Bed & breakfast</p>
+    </div>
+  </a>
+  <a href="/listings/filters?q=food">
+    <div class="filter">
+      <i class="fa-solid fa-mug-hot"></i>
+      <p>Bed & breakfast</p>
+    </div>
+  </a>
+  <div class="tax-toggle">
+    <div class="form-check-reverse form-switch tax_switch_bar">
+      <label class="form-check-label" for="flexSwitchCheckDefault"><b>Display total after taxes</b></label>
+      <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+    </div>
+  </div>
+</div>
+<div class="allListingBody">
+  <div class="allListings mt-4">
+    <%for(let listing of allListings){%>
+      <a href="/listings/<%=listing._id%>" class="show-info">
+        
+            <div class="card listing-card" >
+                <img src="<%=listing.image.url%>" 
+                class="card-img-top"
+                 alt="listing_image">
+                 <div class="card-img-overlay"></div>
+                 
+                 <div class="card-body">
+                   <!-- rating show  -->
+                   <div id="title_rating">
+                     <p><b><%=listing.title%></b></p>
+                     <% let ratingSum=0%> 
+                     <%for(let review of listing.reviews){%>
+                      <%ratingSum+=review.rating%> 
+                      <%}%>
+                      <%let rating=listing.reviews.length==0?0:ratingSum/listing.reviews.length%> 
+                      <div>
+                        <%if(rating.toString().length==1){%>
+                          <%if(rating.toString()=="0"){%>
+                            <span><b><%=rating%></b></span>
+                            <%}else{%>
+                              <span><b><%=rating%>.0</b></span>
+                              <%}%>
+                              <%}else{%>
+                                <span><b><%=rating.toString().substring(0,3)%></b></span>
+                                <%}%>
+                                <!-- <i class="fa-sharp fa-solid fa-star checked"></i> -->
+                                <i class="fa-sharp fa-regular fa-star"></i>
+                                <!-- <span class="fa fa-star checked"></span> -->
+                              </div> 
+                            </div>
+                            <div>
+                              <%if(listing.location.length>20){%>
+                               <span><%=listing.location.substring(0,23)%>....,</span> 
+                              <%}else{%>
+                                <span><%=listing.location%>,</span> 
+                                  <%}%>
+                              <span><%=listing.country%></span>
+                            </div>
+                            <p class="index-price">&#8377;<%= listing.price.toLocaleString("en-IN") %>/night<span class="tax-info"> +18% GST</span></p>
+                            
+                          </div>
+                          
+                        </div>
+                      </a>
+                      <%}%>
+                    </div>  
+                  </div>
+                        
+     <Script>
+      let totalPrice=document.getElementById("flexSwitchCheckDefault");
+      totalPrice.addEventListener("click",()=>{
+        let tax_info=document.querySelectorAll(".tax-info");
+        // console.log(tax_info)
+        for(let tax of tax_info){
+          if(tax.style.display!="inline"){
+              tax.style.display="inline";
+          }else{
+            tax.style.display="none";
+          }
+        }
+      })
+     </Script>               

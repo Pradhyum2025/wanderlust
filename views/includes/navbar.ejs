@@ -1,0 +1,74 @@
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top" >
+  <div class="container-fluid">
+
+    <!-- web site icon -->
+    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+
+        <!-- web site explore icon -->
+        <a class="nav-link" href="/listings">Explore</a>
+      </div>
+
+      <!-- search query -->
+     <div class="navbar-nav ms-auto">
+       <form class="d-flex" role="search">
+         <input class="form-control mr-sm-2 search-input" type="search" placeholder="Search destinations" aria-label="Search"> &nbsp; &nbsp;
+         <button class="btn search-btn my-2 my-sm-0" type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+       </form>
+     </div>
+
+    <!-- Airbnb at your home -->
+      <div class="navbar-nav  ms-auto">
+        <a class="nav-link" href="/listings/new"> 
+        <i class="fa-solid fa-globe"></i> &nbsp; Airbnb your home</a>
+        <div id="userIcon">
+          <i class="fa-solid fa-list"></i>  
+          <i class="userIcon fa-solid fa-circle-user"></i>
+        </div>
+
+        <!-- information about user  -->
+        <div id="user_Info">
+          <div id="hiden_User"><i class="fa-solid fa-xmark"></i></div>
+          <ul>
+            <!-- if curr user exist -->
+            <%if(!currUser){%>
+              <li> <a class="nav-link"  href="/signup">SignUp</a></li>
+              <li class="nav-link" id="navbar-login">Login</li>
+
+               <!-- if curr user NOT exist -->
+            <%}else{ %>
+            <li  class="nav-link">profile &nbsp;<i class="fa-solid fa-angle-right"></i></li>
+            <li  class="nav-link">Your Listings &nbsp;<i class="fa-solid fa-angle-right"></i></li>
+            <li id="hr_line"><hr></li>
+            <li  class="nav-link"><a id="userLogout" class="resetLink" href="/logout">Logout&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+            <%}%>
+            <!-- help center -->
+            <li class="nav-link" >Help center</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>  
+
+<script>
+  let userIcon=document.querySelector("#userIcon");
+  userIcon.addEventListener("click",()=>{
+    if(document.getElementById("user_Info").style.display!="flex"){
+      document.getElementById("user_Info").style.display="flex";
+
+    }else{
+      document.getElementById("user_Info").style.display="none";
+    }
+  })  
+
+  //user info hide
+  let hideUser=document.getElementById("hiden_User");
+  hideUser.addEventListener("click",()=>{
+    document.getElementById("user_Info").style.display="none";
+  })
+</script>

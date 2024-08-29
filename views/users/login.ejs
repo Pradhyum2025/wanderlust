@@ -1,0 +1,35 @@
+<%layout("/layouts/boilerplate.ejs")%>
+
+<div id="loginPage" class="pt-4">
+  <div class="col-12">
+    <p class="login-heading">Login on Wanderlust</p>
+    <form action="/login" method="post" class="needs-validation" novalidate>
+      <div class="mb-3">
+        
+        <label for="username" class="form-label">Username</label>
+        <input type="text" id="username" placeholder="Enter username" name="username" class="form-control" required>
+    </div >
+  <div class="mb-3">
+        
+    <label for="password" class="form-label">Passward</label>
+    <input type="password" id="password" placeholder="Enter password" name="password" class="form-control" required>
+</div >
+<button class="btn login-btn col-12">Login</button>
+    </form>
+  <div class="loginHR mt-4"><span class="col-5"><hr></span><span  class="col-2" style="text-align: center;" >Or</span><span  class="col-5"><hr></span></div>
+  </div>
+  <div class="otherWaytoLogin col-10 mt-4">
+    <div class="withGoogle">
+    <img src="./icons/google.png" alt="with google">
+    <span>Continue with Google</span>
+    </div>
+    <div class="withFacebook">
+      <img src="./icons/facebook.png" alt="with facebook">
+      <span>Continue with facebook</span>
+    </div>
+    <div class="withApple">
+      <img src="./icons/apple-logo.png" alt="with apple"> 
+      <span>Continue with Apple</span>
+    </div>
+  </div>
+</div>
