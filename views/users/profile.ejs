@@ -1,0 +1,129 @@
+<%layout("./layouts/boilerplate.ejs")%>
+  <div class="profile">
+    <div class="show-host">
+      <p class="show-details">User Details</p>
+
+      <% const date=new Date(getUser.createdAt); let monthName=date.toLocaleString('default', { month: 'long' }); const
+        year=date.getFullYear(); %>
+
+
+        <div class="profile-section">
+         
+            <img src="<%=getUser.image%>" class="host-img" alt="host_image" />
+
+          <span class="card-text">
+            <%=getUser.name%>
+          </span>
+        </div>
+        <div class="card-bo card-body">
+          <p class="card-text-var mt-4"> Email verification &nbsp;&nbsp;<i class="fa-solid fa-check"
+              style="color: #23862e"></i> </p>
+
+          <p class="card-text-var mt-3"> Contact verification &nbsp;&nbsp;
+            <%if(getUser.contact){%>
+              <i class="fa-solid fa-check" style="color: #23862e"></i>
+              <%}else{%>
+                <i class="fa-solid fa-exclamation" style="color: #e70d0d"></i>
+                <%}%>
+          </p>
+        </div>
+        <!-- edit info btn -->
+         <%if(currUser && currUser.equals(getUser)){%>
+          <div id="editDetailsBtn">
+            <button class="btn" >Edit info</button>
+          </div>
+         <%}%>
+        <!-- form  Edit user details-->
+         <div  >
+
+           <form id="user-details-form" action="/user/<%=getUser._id%>/edit" method="post" class="needs-validation" novalidate>
+             <div class="mb-3">
+               
+               <label for="name" class="form-label">Name *</label>
+               <input type="text" id="name" placeholder="Enter your name" name="userInfo[name]" value="<%=getUser.name%>"  class="form-control" required>
+               <div class="invalid-feedback">
+                   Please fill username
+                 </div>
+           </div >
+           <div class="mb-3">
+               
+             <label for="contact" class="form-label">contact number *</label>
+             <input type="contact" id="contact" placeholder="Enter contact number" value="<%=getUser.contact%>"  name="userInfo[contact]" class="form-control" required>
+             <div class="invalid-feedback">
+                 Please fill email Id
+               </div>
+         </div >
+         <div class="mb-3"> 
+           <label for="email" class="form-label">Email</label>
+           <input type="email" id="email" placeholder="Enter email (if you want to change)" value="<%=getUser.email%>" name="userInfo[email]" class="form-control">
+           <div class="invalid-feedback">
+               Please fill password
+             </div>
+       </div >
+       <button class="btn btn-success">Edit</button>
+           </form>
+           <!-- form ending  -->
+         </div>
+
+        <div class="date"> At Airbnb since : <span>
+            <%= monthName.toLowerCase() %>
+          </span>
+          <span>
+            <%=year%>
+          </span>
+        </div>
+
+    </div>
+    <div class="curr-listings">
+      <%for(let curr of getUser.listings){%>
+        <div class="curr-listing">
+          <a href="/listings/<%=curr._id%>"> 
+        <div class="l-image">
+          <img  src="<%=curr.image.url%>" alt="" srcset="">
+        </div>
+      </a>
+        <div class="card w-55">
+          <div class="card-body mt-3">
+            <h5 class="card-text mt-2"> <%=curr.title%></h5>
+            <p class="card-tittle mt-2"><%=curr.description%>.</p>
+            <p class="card-tittle mt-2">
+              price :&#8377;<%= curr.price.toLocaleString("en-IN") %>/night
+            </p>
+            <p class="card-tittle mt-2 mb-3">
+              <%=curr.location%>,<%=curr.country%>
+            </p>
+        
+            <%if(currUser && currUser._id.equals(getUser._id)) {%>
+              <div class="btn-bars">
+                <div>
+                  <button class="btn edit-btn show-edit-btn">
+                    <a href="/listings/<%=curr._id%>/edit">Edit</a>
+                  </button>
+                </div>
+                <div>
+                  <form method="post" action="/listings/<%=curr._id%>?_method=DELETE">
+                    <button class="btn btn-dark">Delete</button>
+                  </form>
+                </div>
+              </div>
+              <%}%>
+          </div>
+        </div>
+      </div>
+        <%}%>
+
+    </div>
+
+  </div>
+
+<script>
+    // user detail info form
+    document.querySelector("#editDetailsBtn button").addEventListener("click",()=>{
+    if(document.getElementById("user-details-form").style.display!="block"){
+      document.getElementById("user-details-form").style.display="block";
+
+    }else{
+      document.getElementById("user-details-form").style.display="none";
+    }
+  })  
+</script>

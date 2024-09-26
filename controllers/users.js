@@ -47,6 +47,21 @@ module.exports.userLogout=(req,res,next)=>{
       next(err);
     }
     req.flash("success","You have successfully log-Out");
-    res.redirect("/listings");
+    res.redirect("/listings");                                                                            
   });
+}
+//get profile
+module.exports.getProfile = async(req,res)=>{
+  let {userId}=req.params;
+  let getUser= await User.findById(userId).populate("listings");
+  res.render("users/profile.ejs",{getUser}); 
+}
+//edit profile
+module.exports.editProfile = async(req,res)=>{
+  console.log("edited profile");
+  let {userId}=req.params;
+  console.log(req.body.userInfo);
+  let getUser= await User.findByIdAndUpdate(userId,{...req.body.userInfo});
+  res.redirect(`/user/${userId}`);
+  
 }

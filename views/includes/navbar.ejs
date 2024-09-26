@@ -14,7 +14,7 @@
       </div>
 
       <!-- search query -->
-     <div class="navbar-nav ms-auto">
+     <div class="navbar-nav ms-auto search-Menu-box1">
        <form class="d-flex" role="search">
          <input class="form-control mr-sm-2 search-input" type="search" placeholder="Search destinations" aria-label="Search"> &nbsp; &nbsp;
          <button class="btn search-btn my-2 my-sm-0" type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
@@ -37,12 +37,12 @@
             <!-- if curr user exist -->
             <%if(!currUser){%>
               <li> <a class="nav-link"  href="/signup">SignUp</a></li>
-              <li class="nav-link" id="navbar-login">Login</li>
+              <li> <a   class="nav-link" href="/login">Login</a></li>
 
                <!-- if curr user NOT exist -->
             <%}else{ %>
-            <li  class="nav-link">profile &nbsp;<i class="fa-solid fa-angle-right"></i></li>
-            <li  class="nav-link">Your Listings &nbsp;<i class="fa-solid fa-angle-right"></i></li>
+            <li  class="nav-link"><a class="remove-link-style" href="/user/<%=currUser._id%>">profile </a><i class="fa-solid fa-angle-right"></i></li>
+            <li  class="nav-link"><a class="remove-link-style" href="/user/<%=currUser._id%>">Your Listings</a>&nbsp;<i class="fa-solid fa-angle-right"></i></li>
             <li id="hr_line"><hr></li>
             <li  class="nav-link"><a id="userLogout" class="resetLink" href="/logout">Logout&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
             <%}%>

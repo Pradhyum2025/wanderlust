@@ -18,9 +18,10 @@
   })()
 
 
-//login page information
+//login page information 
 
 let navbarLogin=document.getElementById("navbar-login");
+
 navbarLogin.addEventListener("click",()=>{
   if(document.getElementById("loginPage").style.display!="flex"){
     document.getElementById("loginPage").style.display="flex";

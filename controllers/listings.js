@@ -29,8 +29,11 @@ module.exports.postListing= async (req,res)=>{
 
 // user infomation save with current listing
   newListing.owner=req.user._id;
-
+  
   let savedListing=await newListing.save();
+  req.user.listings.push(savedListing._id);
+  let savedUser=await req.user.save();
+  console.log(req.user);
 
   req.flash('success','new listing created!');
   res.redirect("/listings");

@@ -41,23 +41,23 @@
     .catch((err)=>{console.log(err)});
 
     async function main(){
-        await mongoose.connect(dbUrl);
+        await mongoose.connect(MONGO_URL);
     }
 
-    const store = mongoStore.create({
-        mongoUrl:dbUrl,
-        crypto:{
-           secret:process.env.SECRET 
-        },
-        touchAfter:24*3600,
-    })
+    // const store = mongoStore.create({
+    //     mongoUrl:dbUrl,
+    //     crypto:{
+    //        secret:process.env.SECRET 
+    //     },
+    //     touchAfter:24*3600,
+    // })
 
-    store.on("error",()=>{
-     console.log("ERROR in mongo session store",err)
-    })
+    // store.on("error",()=>{
+    //  console.log("ERROR in mongo session store",err)
+    // })
 
     const sessionOptions={
-        store,
+        // store,
         secret:process.env.SECRET ,
         resave:false,
         saveUninitialized:true,
@@ -95,6 +95,7 @@
 
     //user authentication 
     app.use("/",userRouter);
+
 
 
     app.all('*',(req,res,next)=>{

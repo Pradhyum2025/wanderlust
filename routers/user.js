@@ -25,6 +25,10 @@ router
 .post(saveRedirectUrl,passport.authenticate('local', 
   { failureRedirect: '/login',failureFlash:true}), userController.userAuthentication);
 
+//--------------- get profile------------
+router.get("/user/:userId",userController.getProfile);
+// ------------  edit profile  --------------
+router.post("/user/:userId/edit",userController.editProfile);
 
 //----------------  logout -------------
 

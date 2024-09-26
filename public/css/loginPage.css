@@ -23,9 +23,10 @@
 
 .login-btn{
   background-color: #fe424d !important;
+  transition: All 300ms ease-out;
 }
 .login-btn:hover{
-  background-color: #e83f4a !important;
+  background-color: #e91b29 !important;
 }
 .loginHR{
   display: flex;

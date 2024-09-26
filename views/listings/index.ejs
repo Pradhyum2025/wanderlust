@@ -1,6 +1,13 @@
 <%layout("/layouts/boilerplate.ejs")%>
-
 <div id="filters">  
+
+  <div id="filterQuery">
+    <i class="fa-solid fa-filter"></i>
+    <p>Filter</p>
+  </div>
+  <div id="filter-Opns">
+
+    <div id="hide-filters"><i class="fa-solid fa-xmark"></i></div>
   <a href="/listings">
     <div class="filter">
       <i class="fa-solid fa-border-all"></i>
@@ -25,7 +32,6 @@
       <p>Hotel</p>
     </div>
   </a>
-  <!-- enum:['mountain','room','hotel','pools','food'] -->
   <a href="/listings/filters?q=pools">
     <div class="filter">
       <i class="fa-solid fa-water-ladder"></i>
@@ -35,7 +41,7 @@
   <a href="/listings/filters?q=cool_places">
     <div class="filter">
       <i class="fa-solid fa-tree"></i>
-      <p>Cool place</p>
+      <p>Snowy area</p>
     </div>
   </a>
   <a href="/listings/filters?q=mountain">
@@ -50,24 +56,16 @@
       <p>Bed & breakfast</p>
     </div>
   </a>
-  <a href="/listings/filters?q=food">
-    <div class="filter">
-      <i class="fa-solid fa-mug-hot"></i>
-      <p>Bed & breakfast</p>
-    </div>
-  </a>
-  <a href="/listings/filters?q=food">
-    <div class="filter">
-      <i class="fa-solid fa-mug-hot"></i>
-      <p>Bed & breakfast</p>
-    </div>
-  </a>
-  <a href="/listings/filters?q=food">
-    <div class="filter">
-      <i class="fa-solid fa-mug-hot"></i>
-      <p>Bed & breakfast</p>
-    </div>
-  </a>
+      
+</div>
+      <!-- search query -->
+      <div class="navbar-nav ms-auto search-Menu-box2">
+        <form class="d-flex" role="search">
+          <input class="form-control mr-sm-2 search-input" type="search" placeholder="Search destinations" aria-label="Search"> &nbsp; &nbsp;
+          <button class="btn search-btn my-2 my-sm-0" type="submit"> Search</button>
+        </form>
+      </div>
+ 
   <div class="tax-toggle">
     <div class="form-check-reverse form-switch tax_switch_bar">
       <label class="form-check-label" for="flexSwitchCheckDefault"><b>Display total after taxes</b></label>
@@ -75,44 +73,50 @@
     </div>
   </div>
 </div>
-<div class="allListingBody">
-  <div class="allListings mt-4">
+
+  <div class="Listings-container">
     <%for(let listing of allListings){%>
       <a href="/listings/<%=listing._id%>" class="show-info">
         
             <div class="card listing-card" >
-                <img src="<%=listing.image.url%>" 
-                class="card-img-top"
-                 alt="listing_image">
-                 <div class="card-img-overlay"></div>
+                <img 
+                class="listing-img"
+                src="<%=listing.image.url%>" 
+                alt="listing_image">
+
+                <div class="card-img-overlay"></div>
                  
-                 <div class="card-body">
+                <div class="card-body">
                    <!-- rating show  -->
-                   <div id="title_rating">
+                   <div id="title-rating-box">
                      <p><b><%=listing.title%></b></p>
+
                      <% let ratingSum=0%> 
                      <%for(let review of listing.reviews){%>
-                      <%ratingSum+=review.rating%> 
+                     <%ratingSum+=review.rating%> 
                       <%}%>
+
                       <%let rating=listing.reviews.length==0?0:ratingSum/listing.reviews.length%> 
-                      <div>
-                        <%if(rating.toString().length==1){%>
-                          <%if(rating.toString()=="0"){%>
-                            <span><b><%=rating%></b></span>
-                            <%}else{%>
-                              <span><b><%=rating%>.0</b></span>
-                              <%}%>
-                              <%}else{%>
-                                <span><b><%=rating.toString().substring(0,3)%></b></span>
-                                <%}%>
-                                <!-- <i class="fa-sharp fa-solid fa-star checked"></i> -->
-                                <i class="fa-sharp fa-regular fa-star"></i>
-                                <!-- <span class="fa fa-star checked"></span> -->
-                              </div> 
-                            </div>
+                      <%rating=rating.toString()%> 
+                      <% let org_rating=""%> 
+                      <%if(rating.length==1 && rating!="0"){%>
+                        <%org_rating=rating.toString()%>
+                        <%}else{%>
+                          <%org_rating=rating.substring(0,3)%>
+                        <%}%>
+
+                        <div>
+                          <!-- show rating of listing -->
+                        <%if(org_rating!="0"){%>
+                        <span><b><%=org_rating%></b></span>
+                        <i class="fa-solid fa-star" style="color: orange"></i>
+                        <%}%>
+                          </div>
+                      </div> 
+
                             <div>
                               <%if(listing.location.length>20){%>
-                               <span><%=listing.location.substring(0,23)%>....,</span> 
+                               <span><%=listing.location.substring(0,25)%>..,</span> 
                               <%}else{%>
                                 <span><%=listing.location%>,</span> 
                                   <%}%>
@@ -126,7 +130,6 @@
                       </a>
                       <%}%>
                     </div>  
-                  </div>
                         
      <Script>
       let totalPrice=document.getElementById("flexSwitchCheckDefault");
@@ -141,4 +144,21 @@
           }
         }
       })
+
+      // filterQuery
+let hideFilters=document.getElementById("hide-filters");
+
+hideFilters.addEventListener("click",()=>{
+document.getElementById("filter-Opns").style.display="none";
+})
+
+let filterQuery=document.getElementById("filterQuery");
+
+filterQuery.addEventListener("click",()=>{
+  if(document.getElementById("filter-Opns").style.display!="flex"){
+    document.getElementById("filter-Opns").style.display="flex"
+  }else{
+     document.getElementById("filter-Opns").style.display="none"
+  }
+})
      </Script>               
